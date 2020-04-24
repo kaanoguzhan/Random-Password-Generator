@@ -1,7 +1,8 @@
+from tkinter import Button, Label, Text, Spinbox, Checkbutton, Tk, N, S, E, W, INSERT, END
 import tkinter.font as font
+from datetime import datetime
 import string
 import random
-from tkinter import *
 
 
 class Frame:
@@ -9,7 +10,7 @@ class Frame:
     global useUppercase, useNumbers, useSymbols, useUNICODE
     useUppercase = True
     useNumbers = True
-    useSymbols = False
+    useSymbols = True
     useUNICODE = False
 
     def __init__(self):
@@ -32,19 +33,23 @@ class Frame:
         self.lbl_strength = Label(self.root, height=2, font=font.Font(size=13), text="Strength")
         self.lbl_strength.place(x=395, y=0)
 
-        self.spn_strength = Spinbox(self.root, width=5, font=font.Font(size=13), values=(16, 32, 64, 256, 2048))
+        self.spn_strength = Spinbox(self.root, width=5, font=font.Font(size=13), values=(20, 32, 64, 128, 256, 2048))
         self.spn_strength.place(x=465, y=9)
 
         self.chb_uppercase = Checkbutton(self.root, text="Use Uppercase", width=15, command=self.switchUppercase)
         self.chb_uppercase.place(x=395, y=35)
-        self.chb_uppercase.select()
+        if useUppercase:
+            self.chb_uppercase.select()
 
         self.chb_number = Checkbutton(self.root, text="Use Numbers  ", width=15, command=self.switchNumbers)
         self.chb_number.place(x=395, y=56)
-        self.chb_number.select()
+        if useNumbers:
+            self.chb_number.select()
 
         self.chb_symbol = Checkbutton(self.root, text="Use Symbols   ", width=15, command=self.switchSymbols)
         self.chb_symbol.place(x=395, y=77)
+        if useSymbols:
+            self.chb_symbol.select()
 
         self.chb_symbol = Checkbutton(self.root, text="Use UNICODE ", width=15, command=self.switchUNICODE)
         self.chb_symbol.place(x=395, y=98)
@@ -71,6 +76,12 @@ class Frame:
         self.root.clipboard_clear()
         self.root.clipboard_append(self.txt_password.get("1.0", END))
         self.lbl_progress["text"] = "Copied to clipboard"
+        now = datetime.now()
+        print("Password generated at  " + now.strftime(" %d %B %Y - %H:%M:%S:%f"))
+        print("================================\n")
+        print(self.txt_password.get("1.0", END))
+        print("================================\n\n")
+        self.lbl_progress["text"] = "Generated at [" + now.strftime("%H:%M:%S:%f")[:12] +"]\n"+ "Copied to clipboard"
 
     def switchUppercase(self):
         global useUppercase
@@ -119,7 +130,7 @@ def get_random_unicodes(length):
     unicodes = ""
     for _ in range(length):
         unicodes += get_random_unicode()
-    print("Unicode String for next Character:", unicodes)
+    print("Unicode String for Random Passoword:", unicodes)
     return unicodes
 
 
