@@ -1,9 +1,10 @@
-! Python 3.7 !
+! Python 3.8 !
 
-Random Password Generator written with Python
+Random Password Generator written in Python
 
-Options:
--> Use Uppercase
--> Use Numbers
--> Use Symbols
--> Use Unicode ( Use this at your own risk, since probably you will not know the Unicodes of all characters so it can be very tricky to enter without copy-paste) 
+Options:                        <br />
+-> Default strenght: 20 chars   <br />
+-> Use Uppercase                <br />
+-> Use Numbers                  <br />
+-> Use Symbols                  <br />
+-> Use Unicode ( Use this at your own risk, since probably the password field will not accept Unicode and also it can be very tricky to enter without copy-paste) 
